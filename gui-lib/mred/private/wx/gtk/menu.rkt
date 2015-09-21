@@ -246,7 +246,8 @@
   (def/public-unimplemented set-width)
   (def/public-unimplemented set-title)
 
-  (define/public (set-help-string m s) (void))
+  (define/public (set-help-string m s)
+    (gtk_widget_set_tooltip_text (find-gtk m) s))
 
   (define/public (number) (length items))
 

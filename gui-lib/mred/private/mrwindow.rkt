@@ -103,7 +103,7 @@
       enable is-enabled? on-superwindow-enable
       get-label set-label get-plain-label
       get-client-size get-size get-width get-height get-x get-y
-      get-cursor set-cursor popup-menu
+      get-cursor set-cursor popup-menu set-tooltip-text
       show is-shown? on-superwindow-show refresh
       warp-pointer
       get-handle get-client-handle))
@@ -167,6 +167,8 @@
        [get-handle (lambda () (send wx get-handle))]
        [get-client-handle (lambda () (send wx get-client-handle))]
 
+       [set-tooltip-text (lambda (t) (send wx set-tooltip-text t))]
+       
        [accept-drop-files
         (entry-point
          (case-lambda

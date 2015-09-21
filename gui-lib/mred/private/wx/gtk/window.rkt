@@ -41,6 +41,7 @@
 	      gtk_widget_set_can_focus
               gtk_widget_set_sensitive
 	      gtk_widget_get_scale_factor
+	      gtk_widget_set_tooltip_text
 
               connect-focus
               connect-key
@@ -101,6 +102,8 @@
   #:fail (lambda () #f))
 (define-gtk gtk_widget_get_scale_factor (_fun _GtkWidget -> _int)
   #:fail (lambda () (lambda (gtk) 1)))
+
+(define-gtk gtk_widget_set_tooltip_text (_fun _GtkWidget _string -> _void))
 
 (define-gdk gdk_keyboard_grab (_fun _GdkWindow _gboolean _int -> _void))
 (define-gdk gdk_keyboard_ungrab (_fun _int -> _void))
@@ -797,6 +800,9 @@
         (client-to-screen gx gy)
         (send m popup (unbox gx) (unbox gy)
               (lambda (thunk) (queue-window-event this thunk)))))
+
+    (define/public (set-tooltip-text text)
+      (gtk_widget_set_tooltip_text gtk text))
 
     (define/public (center a b) (void))
     (define/public (refresh) (refresh-all-children))
