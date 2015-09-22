@@ -852,13 +852,16 @@
       (set! sticky-cursor? #f)
       (send (get-parent) end-no-cursor-rects))
 
-    (define/public (get-handle) (get-cocoa))
+    (define/public (get-handle) (printf "wtf!~n") (get-cocoa))
     (define/public (get-client-handle) (get-cocoa-content))
 
     (define/public (popup-menu m x y)
       (send m do-popup (get-cocoa-content) (get-cocoa-window) x (flip-client y)
             (lambda (thunk)
               (queue-window-event this thunk))))
+
+    (define/public (set-tooltip-text text)
+      (tell cocoa setToolTip: #:type _NSString text))
 
     (define/public (center a b) (void))
     (define/public (refresh) (refresh-all-children))

@@ -138,8 +138,6 @@
   (def/public-unimplemented set-width)
   (def/public-unimplemented set-title)
 
-  (define/public (set-help-string m s) (void))
-
   (def/public-unimplemented number)
 
   (define/private (find-pos item)
@@ -156,6 +154,14 @@
           (cocoa-cb (tell cocoa-menu itemAtIndex: #:type _NSInteger pos)))
         (cb (list-ref items pos)))))
   
+  (define/public (set-help-string m s)
+    (printf "maybe do some stuff? ~a ~a~n" (find-pos m) cocoa-menu)
+    (adjust m
+            (lambda (item-cocoa)
+	      (printf "doing things~n")
+	      (tellv item-cocoa setToolTip: #:type _NSString s))
+	    (lambda (mitem) (void))))
+
   (define/public (set-label item label)
     (adjust item
             (lambda (item-cocoa)
